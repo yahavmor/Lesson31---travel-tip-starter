@@ -13,7 +13,8 @@
         <h1>TravelTip</h1>
         <section class="selected-loc">
             <h2>Location: <span class="loc-name"></span> <span class="loc-rate"></span></h2>
-            <h4 class="loc-address"></h4><h3 class="loc-distance"></h3>
+            <h4 class="loc-address"></h4>
+            <h3 class="loc-distance"></h3>
             <button onclick="app.onCopyLoc()">Copy location</button>
             <button onclick="app.onShareLoc()">Share location</button>
             <input name="loc-copier" />
@@ -37,7 +38,8 @@
                     <div>
                         <label>
                             Min Rate:
-                            <input name="filter-by-rate" type="range" min="0" max="5" value="0" class="filter-rate-range"
+                            <input name="filter-by-rate" type="range" min="0" max="5" value="0"
+                                class="filter-rate-range"
                                 onchange="this.title=this.value;app.onSetFilterBy({minRate: this.value})" />
                         </label>
                     </div>
@@ -74,13 +76,31 @@
         <div class="modal-header">Confirm removal</div>
         <p>Are you sure you want to remove this location? This action cannot be undone.</p>
         <div class="modal-actions">
-          <button class="btn-cancel">Cancel</button>
-          <button class="btn-confirm">Delete</button>
+            <button class="btn-cancel">Cancel</button>
+            <button class="btn-confirm">Delete</button>
         </div>
+    </dialog>
+
+
+    <dialog class="location-modal">
+        <div class="modal-header">
+        </div>
+        <form class="location-form">
+            <label>
+                <input type="text" name="location-name" placeholder="Enter location name" required />
+            </label>
+            <label>
+                <input type="range" name="location-rate" min="1" max="5" value="3"
+                    onchange="this.nextElementSibling.textContent = this.value" />
+                <span>3</span>
+            </label>
+            <div class="modal-actions">
+                <button type="submit" class="btn-save">Save</button>
+            </div>
+        </form>
     </dialog>
 
     <script type="module" src="js/app.controller.js"></script>
 </body>
 
 </html>
-

@@ -86,11 +86,15 @@ function onSearchAddress(ev) {
 }
 
 function onAddLoc(geo) {
+    const dialog = document.querySelector('.location-modal')
+    dialog.showModal()
+
+
     const locName = prompt('Loc name', geo.address || 'Just a place')
-    const clickPos = {lat:geo.lat,lng:geo.lng}
+    const clickPos = { lat: geo.lat, lng: geo.lng }
     console.log(locService.gUserPos)
     if (!locName) return
-    const dis = utilService.getDistance(locService.gUserPos,clickPos)
+    const dis = utilService.getDistance(locService.gUserPos, clickPos)
     const loc = {
         name: locName,
         rate: +prompt(`Rate (1-5)`, '3'),
@@ -173,8 +177,8 @@ function displayLoc(loc) {
     const el = document.querySelector('.selected-loc')
     el.querySelector('.loc-name').innerText = loc.name
     el.querySelector('.loc-address').innerText = loc.geo.address
-    el.querySelector('.loc-distance').innerText = `${loc.dis} Km from you` 
-        // <!-- yahav 10/09 19:15 adding loc distance display -->
+    el.querySelector('.loc-distance').innerText = `${loc.dis} Km from you`
+    // <!-- yahav 10/09 19:15 adding loc distance display -->
     el.querySelector('.loc-rate').innerHTML = '★'.repeat(loc.rate)
     el.querySelector('[name=loc-copier]').value = window.location
     el.classList.add('show')
@@ -221,7 +225,7 @@ function getFilterByFromQueryParams() {
     const queryParams = new URLSearchParams(window.location.search)
     const txt = queryParams.get('txt') || ''
     const minRate = queryParams.get('minRate') || 0
-    locService.setFilterBy({txt, minRate})
+    locService.setFilterBy({ txt, minRate })
 
     document.querySelector('input[name="filter-by-txt"]').value = txt
     document.querySelector('input[name="filter-by-rate"]').value = minRate
@@ -236,7 +240,7 @@ function getLocIdFromQueryParams() {
 function onSetSortBy() {
     const prop = document.querySelector('.sort-by').value
     const isDesc = document.querySelector('.sort-desc').checked
-    
+
 
     if (!prop) return
 
@@ -315,46 +319,46 @@ function cleanStats(stats) {
 }
 
 function onCancel() {
-return new Promise((resolve) => {
-    resolve("Canceled");
-});
+    return new Promise((resolve) => {
+        resolve("Canceled");
+    });
 }
 
 function onConfirm(locId) {
-return locService.remove(locId)
-    .then(() => {
-    flashMsg('Location removed');
-    unDisplayLoc();
-    loadAndRenderLocs();
-    return "Deleted";
-    })
-    .catch(err => {
-    console.error('Oops:', err);
-    flashMsg('Cannot remove location');
-    throw err;
-    })
+    return locService.remove(locId)
+        .then(() => {
+            flashMsg('Location removed');
+            unDisplayLoc();
+            loadAndRenderLocs();
+            return "Deleted";
+        })
+        .catch(err => {
+            console.error('Oops:', err);
+            flashMsg('Cannot remove location');
+            throw err;
+        })
 }
 
 
 
 function onRemoveLoc(locId) {
-document.querySelector('.removal-modal').showModal(); 
+    document.querySelector('.removal-modal').showModal();
 
-document.querySelector('.btn-cancel').addEventListener('click', () => {
-    onCancel().then(result => {
-        console.log("Result:", result);
-        document.querySelector('.removal-modal').close();
-    });
-    });
-    
-    document.querySelector('.btn-confirm').addEventListener('click', () => {
-    onConfirm(locId)
-        .then(result => {
-        console.log("Result:", result);
-        document.querySelector('.removal-modal').close();
-        })
-        .catch(err => {
-        console.error("Error during deletion:", err);
+    document.querySelector('.btn-cancel').addEventListener('click', () => {
+        onCancel().then(result => {
+            console.log("Result:", result);
+            document.querySelector('.removal-modal').close();
         });
+    });
+
+    document.querySelector('.btn-confirm').addEventListener('click', () => {
+        onConfirm(locId)
+            .then(result => {
+                console.log("Result:", result);
+                document.querySelector('.removal-modal').close();
+            })
+            .catch(err => {
+                console.error("Error during deletion:", err);
+            });
     });
 }
