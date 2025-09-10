@@ -85,3 +85,24 @@
     height: 1em;
     margin-inline-end: 0.3em;
 }
+
+
+.location-modal {
+    border: none;
+    border-radius: 0.5em;
+    padding: 1.5em;
+    box-shadow: 0 0 15px var(--bg1);
+    width: 350px;
+}
+
+/* .location-form [name=loc-name] {
+    display: block;
+    margin-bottom: 0.5em;
+    box-shadow: 2px 2px 5px var(--bg2);
+} */
+
+.location-form input {
+    /* display: block; */
+    margin-bottom: 0.5em;
+    box-shadow: 2px 2px 5px var(--bg2);
+}

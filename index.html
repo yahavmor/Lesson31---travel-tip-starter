@@ -83,20 +83,11 @@
 
 
     <dialog class="location-modal">
-        <div class="modal-header">
-        </div>
         <form class="location-form">
-            <label>
-                <input type="text" name="loc-name" placeholder="Enter location name" required />
-            </label>
-            <label>
-                <input type="range" name="loc-rate" min="1" max="5" value="3" />
-                <span>3</span>
-            </label>
-            <div class="modal-actions">
-                <button type="submit" class="btn-save">Save</button>
-                <button type="button" onclick="app.onCloseLocationModal()" class="btn-close">Close</button>
-            </div>
+            <input type="text" name="loc-name" placeholder="Saku, Nagano, Japan" required />
+            <input type="number" name="loc-rate" min="1" max="5" value="5" />
+            <button type="submit" class="btn-save">Save</button>
+            <button type="button" onclick="app.onCloseLocationModal()" class="btn-close">Close</button>
         </form>
     </dialog>
 
