@@ -17,6 +17,7 @@ window.app = {
     onShareLoc,
     onSetSortBy,
     onSetFilterBy,
+    onCloseLocationModal,
 }
 
 function onInit() {
@@ -90,28 +91,54 @@ function onAddLoc(geo) {
     dialog.showModal()
 
 
-    const locName = prompt('Loc name', geo.address || 'Just a place')
-    const clickPos = { lat: geo.lat, lng: geo.lng }
-    console.log(locService.gUserPos)
-    if (!locName) return
-    const dis = utilService.getDistance(locService.gUserPos, clickPos)
-    const loc = {
-        name: locName,
-        rate: +prompt(`Rate (1-5)`, '3'),
-        geo,
-        dis: dis
+    const nameInput = document.querySelector('[name=loc-name]')
+    nameInput.value = geo.address || 'Just a place'
+
+
+    const form = document.querySelector('.location-form')
+    form.onsubmit = (ev) => {
+        ev.preventDefault()
+        const locName = document.querySelector('[name=loc-name]').value
+        const locRate = document.querySelector('[name=loc-rate]').value
+
+        if (!locName.trim()) {
+            flashMsg('Please enter a location name')
+            return
+        }
+
+        dialog.close()
+
+
+        const clickPos = { lat: geo.lat, lng: geo.lng }
+        const dis = utilService.getDistance(locService.gUserPos, clickPos)
+        const loc = {
+            name: locName,
+            rate: +locRate,
+            geo,
+            dis: dis
+        }
+
+        locService.save(loc)
+            .then((savedLoc) => {
+                flashMsg(`Added Location (id: ${savedLoc.id})`)
+                utilService.updateQueryParams({ locId: savedLoc.id })
+                loadAndRenderLocs()
+                locService.showDistance(loc)
+            })
+            .catch(err => {
+                console.error('OOPs:', err)
+                flashMsg('Cannot add location')
+            })
+
+
+        form.onsubmit = null
     }
-    locService.save(loc)
-        .then((savedLoc) => {
-            flashMsg(`Added Location (id: ${savedLoc.id})`)
-            utilService.updateQueryParams({ locId: savedLoc.id })
-            loadAndRenderLocs()
-            locService.showDistance(loc)
-        })
-        .catch(err => {
-            console.error('OOPs:', err)
-            flashMsg('Cannot add location')
-        })
+}
+
+// Guy Add this function
+function onCloseLocationModal() {
+    const dialog = document.querySelector('.location-modal')
+    dialog.close()
 }
 
 function loadAndRenderLocs() {
