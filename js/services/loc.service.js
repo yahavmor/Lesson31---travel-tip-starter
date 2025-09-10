@@ -20,6 +20,7 @@ const DB_KEY = 'locs'
 var gSortBy = { rate: -1 }
 var gFilterBy = { txt: '', minRate: 0 }
 var gPageIdx
+let gUserPos = {lat:31.8872,lng:34.8856}
 
 _createLocs()
 
@@ -30,7 +31,10 @@ export const locService = {
     save,
     setFilterBy,
     setSortBy,
-    getLocCountByRateMap
+    getLocCountByRateMap,
+    showDistance,
+    gUserPos
+
 }
 
 function query() {
@@ -38,7 +42,7 @@ function query() {
         .then(locs => {
             if (gFilterBy.txt) {
                 const regex = new RegExp(gFilterBy.txt, 'i')
-                locs = locs.filter(loc => regex.test(loc.name))
+                locs = locs.filter(loc => regex.test(loc.name)||regex.test(loc.geo.address))
             }
             if (gFilterBy.minRate) {
                 locs = locs.filter(loc => loc.rate >= gFilterBy.minRate)
@@ -54,8 +58,9 @@ function query() {
                 locs.sort((p1, p2) => (p1.rate - p2.rate) * gSortBy.rate)
             } else if (gSortBy.name !== undefined) {
                 locs.sort((p1, p2) => p1.name.localeCompare(p2.name) * gSortBy.name)
+            } else if(gSortBy.time !== undefined){
+                locs.sort((p1, p2) => (p1.createdAt - p2.createdAt) * gSortBy.time)
             }
-
             return locs
         })
 }
@@ -140,9 +145,14 @@ function _createDemoLocs() {
                     lat: 28.5096676,
                     lng: 34.5165187,
                     zoom: 11
-                }
+                },
             }
         ]
+    locs = locs.map(loc => {
+        const placePos = { lat: loc.geo.lat, lng: loc.geo.lng }
+        loc.dis = utilService.getDistance(gUserPos, placePos)
+        return loc   
+    })
 
     locs = locs.map(_createLoc)
     utilService.saveToStorage(DB_KEY, locs)
@@ -152,6 +162,17 @@ function _createLoc(loc) {
     loc.id = utilService.makeId()
     loc.createdAt = loc.updatedAt = utilService.randomPastTime()
     return loc
+}
+
+function showDistance(loc){
+    if (!loc || !loc.geo) return null
+    const latLng = { lat: loc.geo.lat, lng: loc.geo.lng }
+    const dis = utilService.getDistance(gUserPos, latLng, 'K')
+    loc.dis = dis
+    if (loc.id) {
+        save(loc).catch(err => console.error('Cannot save loc after updating distance', err))
+    }
+    return dis
 }
 
 
@@ -171,4 +192,3 @@ function _createLoc(loc) {
 //         }
 //     }
 // }
-

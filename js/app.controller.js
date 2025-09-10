@@ -1,3 +1,4 @@
+
 import { utilService } from './services/util.service.js'
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
@@ -41,6 +42,7 @@ function renderLocs(locs) {
         <li class="loc ${className}" data-id="${loc.id}">
             <h4>  
                 <span>${loc.name}</span>
+                <span>distance from you:  ${loc.dis} Km</span>
                 <span title="${loc.rate} stars">${'★'.repeat(loc.rate)}</span>
             </h4>
             <p class="muted">
@@ -68,18 +70,7 @@ function renderLocs(locs) {
     document.querySelector('.debug').innerText = JSON.stringify(locs, null, 2)
 }
 
-function onRemoveLoc(locId) {
-    locService.remove(locId)
-        .then(() => {
-            flashMsg('Location removed')
-            unDisplayLoc()
-            loadAndRenderLocs()
-        })
-        .catch(err => {
-            console.error('OOPs:', err)
-            flashMsg('Cannot remove location')
-        })
-}
+
 
 function onSearchAddress(ev) {
     ev.preventDefault()
@@ -96,18 +87,22 @@ function onSearchAddress(ev) {
 
 function onAddLoc(geo) {
     const locName = prompt('Loc name', geo.address || 'Just a place')
+    const clickPos = {lat:geo.lat,lng:geo.lng}
+    console.log(locService.gUserPos)
     if (!locName) return
-
+    const dis = utilService.getDistance(locService.gUserPos,clickPos)
     const loc = {
         name: locName,
         rate: +prompt(`Rate (1-5)`, '3'),
-        geo
+        geo,
+        dis: dis
     }
     locService.save(loc)
         .then((savedLoc) => {
             flashMsg(`Added Location (id: ${savedLoc.id})`)
             utilService.updateQueryParams({ locId: savedLoc.id })
             loadAndRenderLocs()
+            locService.showDistance(loc)
         })
         .catch(err => {
             console.error('OOPs:', err)
@@ -127,10 +122,11 @@ function loadAndRenderLocs() {
 function onPanToUserPos() {
     mapService.getUserPosition()
         .then(latLng => {
-            mapService.panTo({ ...latLng, zoom: 15 })
+            locService.gUserPos = latLng
+            mapService.panTo({ ...locService.gUserPos, zoom: 15 })
             unDisplayLoc()
             loadAndRenderLocs()
-            flashMsg(`You are at Latitude: ${latLng.lat} Longitude: ${latLng.lng}`)
+            flashMsg(`You are at Latitude: ${locService.gUserPos.lat} Longitude: ${locService.gUserPos.lng}`)
         })
         .catch(err => {
             console.error('OOPs:', err)
@@ -238,6 +234,7 @@ function getLocIdFromQueryParams() {
 function onSetSortBy() {
     const prop = document.querySelector('.sort-by').value
     const isDesc = document.querySelector('.sort-desc').checked
+    
 
     if (!prop) return
 
@@ -313,4 +310,49 @@ function cleanStats(stats) {
         return acc
     }, [])
     return cleanedStats
+}
+
+function onCancel() {
+return new Promise((resolve) => {
+    resolve("Canceled");
+});
+}
+
+function onConfirm(locId) {
+return locService.remove(locId)
+    .then(() => {
+    flashMsg('Location removed');
+    unDisplayLoc();
+    loadAndRenderLocs();
+    return "Deleted";
+    })
+    .catch(err => {
+    console.error('Oops:', err);
+    flashMsg('Cannot remove location');
+    throw err;
+    })
+}
+
+
+
+function onRemoveLoc(locId) {
+document.querySelector('.removal-modal').showModal(); 
+
+document.querySelector('.btn-cancel').addEventListener('click', () => {
+    onCancel().then(result => {
+        console.log("Result:", result);
+        document.querySelector('.removal-modal').close();
+    });
+    });
+    
+    document.querySelector('.btn-confirm').addEventListener('click', () => {
+    onConfirm(locId)
+        .then(result => {
+        console.log("Result:", result);
+        document.querySelector('.removal-modal').close();
+        })
+        .catch(err => {
+        console.error("Error during deletion:", err);
+        });
+    });
 }

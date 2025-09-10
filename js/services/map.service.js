@@ -1,4 +1,3 @@
-
 export const mapService = {
     initMap,
     getUserPosition,
@@ -8,8 +7,7 @@ export const mapService = {
     addClickListener
 }
 
-// TODO: Enter your API Key
-const API_KEY = ''
+const API_KEY = 'AIzaSyAFUswrot09IpiaHmKfjwtqyWvaDxWSTV0'
 
 var gMap
 var gMarker
@@ -32,18 +30,12 @@ function panTo({ lat, lng, zoom = 15 }) {
 }
 
 function lookupAddressGeo(geoOrAddress) {
-    // Sample URLs:
-    // const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}`
-    // const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452`
-
     var url = `https://maps.googleapis.com/maps/api/geocode/json?key=${API_KEY}&`
     url += (geoOrAddress.lat) ? `latlng=${geoOrAddress.lat},${geoOrAddress.lng}` :
         `address=${geoOrAddress}`
-
     return fetch(url)
         .then(res => res.json())
         .then(res => {
-            // console.log('RES IS', res)
             if (!res.results.length) return new Error('Found nothing')
             res = res.results[0]
             const { formatted_address, geometry } = res
@@ -54,7 +46,6 @@ function lookupAddressGeo(geoOrAddress) {
                 lng: geometry.location.lng,
                 zoom: gMap.getZoom()
             }
-            // console.log('GEO IS', geo)
             return geo
         })
 
@@ -79,17 +70,24 @@ function setMarker(loc) {
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getUserPosition() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         function onSuccess(res) {
-            const latLng = {
-                lat: res.coords.latitude,
-                lng: res.coords.longitude
-            }
-            resolve(latLng)
+            const lat = res.coords.latitude
+            const lng = res.coords.longitude
+            resolve({lat,lng})
         }
-        navigator.geolocation.getCurrentPosition(onSuccess, reject)
+
+        function onError() {
+            resolve({ lat: 31.88282, lng: 34.85832 }) 
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccess, onError)
     })
 }
+
+
+
+
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
@@ -104,3 +102,4 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('GoogleMaps script failed to load')
     })
 }
+

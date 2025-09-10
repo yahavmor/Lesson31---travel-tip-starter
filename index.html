@@ -46,6 +46,7 @@
                         <select class="sort-by" onchange="app.onSetSortBy()">
                             <option value="name">Name</option>
                             <option value="rate" selected>Rate</option>
+                            <option value="time" selected>Creation Time</option>
                         </select>
                         <label>
                             <input class="sort-desc" type="checkbox" oninput="app.onSetSortBy()" />
@@ -68,7 +69,18 @@
     </main>
     <pre class="debug" hidden></pre>
     <div class="user-msg"></div>
+
+    <dialog class="removal-modal">
+        <div class="modal-header">Confirm removal</div>
+        <p>Are you sure you want to remove this location? This action cannot be undone.</p>
+        <div class="modal-actions">
+          <button class="btn-cancel">Cancel</button>
+          <button class="btn-confirm">Delete</button>
+        </div>
+    </dialog>
+
     <script type="module" src="js/app.controller.js"></script>
 </body>
 
 </html>
+
