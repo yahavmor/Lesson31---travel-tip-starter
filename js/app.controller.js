@@ -17,7 +17,8 @@ window.app = {
     onShareLoc,
     onSetSortBy,
     onSetFilterBy,
-    onCloseLocationModal,
+    onCloseLocationModal, // Guy Add this function
+    onToggleTheme, // Guy Add this function
 }
 
 function onInit() {
@@ -388,4 +389,27 @@ function onRemoveLoc(locId) {
                 console.error("Error during deletion:", err);
             });
     });
+}
+
+
+function onToggleTheme(isDarkTheme) {
+    const root = document.documentElement
+
+    if (isDarkTheme) {
+
+        root.style.setProperty('--bg1', 'rgb(37, 13, 195)')
+        root.style.setProperty('--bg2', 'rgb(26, 110, 146)')
+        root.style.setProperty('--bg3', 'rgb(9, 49, 226)')
+        root.style.setProperty('--color2', 'rgb(94, 169, 240)')
+        root.style.setProperty('--color3', 'rgb(211, 187, 48)')
+        root.style.setProperty('--color4', 'rgb(90, 66, 6)')
+    } else {
+
+        root.style.setProperty('--bg1', 'darkslateblue')
+        root.style.setProperty('--bg2', 'darkorchid')
+        root.style.setProperty('--bg3', 'darkmagenta')
+        root.style.setProperty('--color2', 'deeppink')
+        root.style.setProperty('--color3', 'gold')
+        root.style.setProperty('--color4', 'goldenrod')
+    }
 }

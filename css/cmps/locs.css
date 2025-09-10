@@ -103,3 +103,51 @@
     margin-bottom: 0.5em;
     box-shadow: 2px 2px 5px var(--bg2);
 }
+
+.theme-toggle-container {
+    background-color: var(--bg2);
+    padding: 0.5em;
+    text-align: center;
+    border-bottom: 1px solid var(--bg1);
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--color1);
+}
+
+.theme-toggle input {
+    display: none;
+}
+
+.theme-toggle .slider {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: var(--color1);
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle .slider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--bg1);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.theme-toggle input:checked+.slider {
+    background-color: var(--color3);
+}
+
+.theme-toggle input:checked+.slider::before {
+    transform: translateX(20px);
+}
