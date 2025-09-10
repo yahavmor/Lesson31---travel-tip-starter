@@ -79,6 +79,8 @@ window.app = {
     onShareLoc,
     onSetSortBy,
     onSetFilterBy
+    onCloseLocationModal,  // New
+    onToggleTheme         // New
 }
 ```
 
@@ -88,4 +90,26 @@ Here is a sample usage:
 <button onclick="app.onShareLoc()">Share location</button>
 ```
 
+## Project Structure
+css/
+├── base/
+│   ├── vars.css     # CSS variables for theming
+│   └── base.css     # Base styles
+├── cmps/
+│   ├── locs.css     # Location components and modal styles
+│   ├── selected-loc.css
+│   └── user-msg.css
+└── main.css
+js/
+├── services/
+│   ├── loc.service.js      # Location data management
+│   ├── map.service.js      # Google Maps integration
+│   ├── util.service.js     # Utility functions
+│   └── async-storage.service.js # Local storage wrapper
+└── app.controller.js       # Main app controller
 
+## Advanced Features
+- **Theme Toggle**: Switch between light and dark color themes
+- **Location Modal**: Modern modal interface for adding/editing locations
+- **Distance Calculation**: Shows distance from user's current position
+- **Statistics Dashboard**: Visual pie chart showing location ratings distribution
