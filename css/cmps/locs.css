@@ -3,9 +3,14 @@
     padding: 0.5em;
     min-height: 90vh;
     /*<Guy> Ensuring it takes most of the viewport height */
+
+    display: flex;
+    flex-direction: column;
 }
 
-
+.locs-content {
+    flex: 1;
+}
 
 .loc-list {
     list-style: none;
@@ -61,6 +66,13 @@
     text-align: end;
 }
 
+.form-search input {
+    padding: 0.3em;
+    border: 1px solid var(--gray1);
+    border-radius: 0.3em;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .form-search button {
     /* background-color: var(--bg2); */
     /* color: var(--color1); */
@@ -95,6 +107,16 @@
 
 .loc-filter input[type=text] {
     width: 98%;
+    height: 5vh;
+    margin-bottom: .5em;
+    box-shadow: 2px 2px 5px var(--bg2);
+    border-radius: 0.5em;
+}
+
+.loc-filter select {
+
+    box-shadow: 2px 2px 5px var(--bg2);
+    border-radius: 0.5em;
     margin-bottom: .5em;
 }
 
@@ -111,6 +133,7 @@
 
 /* <Guy> Adding pie chart styles */
 .loc-stats {
+    margin-top: auto;
     text-align: left;
     margin-bottom: 1em;
     color: var(--color1);
@@ -157,7 +180,8 @@
     border-radius: 0.5em;
     padding: 1.5em;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    width: 360px;
+    width: 300px;
+    text-align: center;
 }
 
 .location-modal::backdrop {
@@ -167,6 +191,20 @@
 .location-form input {
     margin-bottom: 0.5em;
     box-shadow: 2px 2px 5px var(--bg2);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-content input {
+    width: 90%;
+    padding: 0.3em;
+    margin-bottom: 0.5em;
+    border: 1px solid var(--gray1);
+    border-radius: 0.3em;
 }
 
 .rate-modal {
@@ -179,8 +217,11 @@
 }
 
 .rate-modal input {
+    width: 90%;
+    padding: 0.3em;
     margin-bottom: 0.5em;
-    box-shadow: 2px 2px 5px var(--bg2);
+    border: 1px solid var(--gray1);
+    border-radius: 0.3em;
 }
 
 .rate-modal::backdrop {

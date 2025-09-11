@@ -104,13 +104,11 @@ function onAddLoc(geo) {
     const dialog = document.querySelector('.location-modal')
     dialog.showModal()
 
-
     const nameInput = document.querySelector('[name=loc-name]')
     nameInput.value = geo.address || 'Just a place'
 
-
-    const form = document.querySelector('.location-form')
-    form.onsubmit = (ev) => {
+    const saveBtn = dialog.querySelector('.btn-save')
+    const handleSave = (ev) => {
         ev.preventDefault()
         const locName = document.querySelector('[name=loc-name]').value
         const locRate = document.querySelector('[name=loc-rate]').value
@@ -121,7 +119,6 @@ function onAddLoc(geo) {
         }
 
         dialog.close()
-
 
         const clickPos = { lat: geo.lat, lng: geo.lng }
         const dis = utilService.getDistance(locService.gUserPos, clickPos)
@@ -144,9 +141,10 @@ function onAddLoc(geo) {
                 flashMsg('Cannot add location')
             })
 
-
-        form.onsubmit = null
+        saveBtn.removeEventListener('click', handleSave)
     }
+
+    saveBtn.addEventListener('click', handleSave)
 }
 
 // Guy Add this function
