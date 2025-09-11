@@ -8,6 +8,7 @@
     flex-direction: column;
 }
 
+
 .locs-content {
     flex: 1;
 }
@@ -31,6 +32,7 @@
 
 .loc-list li {
     padding-bottom: .2em;
+    margin-left: 0.2em;
     border-bottom: 1px solid #222;
 }
 
@@ -119,6 +121,8 @@
     border-radius: 0.5em;
     margin-bottom: .5em;
 }
+
+
 
 .pie {
     display: inline-block;
@@ -332,4 +336,8 @@
 
 .theme-toggle input:checked+.slider::before {
     transform: translateX(20px);
+}
+
+.hidden {
+    display: none;
 }

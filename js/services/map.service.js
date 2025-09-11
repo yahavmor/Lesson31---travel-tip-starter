@@ -4,7 +4,8 @@ export const mapService = {
     setMarker,
     panTo,
     lookupAddressGeo,
-    addClickListener
+    addClickListener,
+    gMap: null
 }
 
 const API_KEY = 'AIzaSyAFUswrot09IpiaHmKfjwtqyWvaDxWSTV0'
@@ -18,8 +19,11 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             gMap = new google.maps.Map(
                 document.querySelector('.map'), {
                 center: { lat, lng },
-                zoom: 8
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.SATELLITE
             })
+
+            mapService.gMap = gMap
         })
 }
 
@@ -74,11 +78,11 @@ function getUserPosition() {
         function onSuccess(res) {
             const lat = res.coords.latitude
             const lng = res.coords.longitude
-            resolve({lat,lng})
+            resolve({ lat, lng })
         }
 
         function onError() {
-            resolve({ lat: 31.88282, lng: 34.85832 }) 
+            resolve({ lat: 31.88282, lng: 34.85832 })
         }
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError)

@@ -57,3 +57,25 @@ button:hover {
 .smaller {
     font-size: .8em;
 }
+
+.welcome-message {
+    text-align: center;
+    color: var(--color1);
+    font-size: 1.5em;
+    margin: 1em 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}

@@ -20,6 +20,88 @@ window.app = {
     onCloseLocationModal, // Guy Add this function
     onToggleTheme, // Guy Add this function
     onCloseWindow, // Guy Add this function
+    onClickEarth, // Guy Add this function
+}
+
+function onClickEarth() {
+    const welcomeMsg = document.querySelector('.welcome-message')
+    welcomeMsg.classList.add('hidden')
+
+    const elVideo = document.querySelector('.globe video')
+    const elGlobe = document.querySelector('.globe')
+
+    elVideo.classList.add('zoom-in')
+
+    setTimeout(() => {
+        elGlobe.classList.add('hidden')
+
+        const elMap = document.querySelector('.map')
+        elMap.classList.remove('hidden')
+
+        const elSideBar = document.querySelector('.side-bar')
+        elSideBar.classList.remove('hidden')
+
+        const elSearchForm = document.querySelector('.form-search')
+        elSearchForm.classList.remove('hidden')
+
+
+        setTimeout(() => {
+            if (window.google && window.google.maps) {
+
+                mapService.initMap()
+                    .then(() => {
+
+                        startMapZoomAnimation()
+                        mapService.addClickListener(onAddLoc)
+                        loadAndRenderLocs()
+                    })
+            }
+        }, 200)
+
+    }, 1500)
+}
+
+// <Guy> Add this function
+function startMapZoomAnimation() {
+    if (!mapService.gMap) return
+
+    mapService.getUserPosition()
+        .then(userPos => {
+            locService.gUserPos = userPos
+
+            mapService.gMap.setMapTypeId(google.maps.MapTypeId.SATELLITE)
+            mapService.gMap.setCenter({ lat: userPos.lat, lng: userPos.lng })
+
+            let currentZoom = 2
+            const targetZoom = 15
+            const zoomStep = 0.2
+            const delay = 100
+
+            mapService.gMap.setZoom(currentZoom)
+
+            const zoomInterval = setInterval(() => {
+                currentZoom += zoomStep
+
+                if (currentZoom >= targetZoom) {
+                    mapService.gMap.setZoom(targetZoom)
+                    clearInterval(zoomInterval)
+
+                    setTimeout(() => {
+                        mapService.gMap.setMapTypeId(google.maps.MapTypeId.ROADMAP)
+                        flashMsg(`You are at Latitude: ${userPos.lat} Longitude: ${userPos.lng}`)
+                        loadAndRenderLocs()
+                    }, 300)
+
+                } else {
+                    mapService.gMap.setZoom(currentZoom)
+                }
+            }, delay)
+        })
+        .catch(err => {
+            console.error('Cannot get user position:', err)
+            mapService.gMap.setCenter({ lat: 32.0749831, lng: 34.9120554 })
+            flashMsg('Cannot get your position, showing default location')
+        })
 }
 
 function onInit() {

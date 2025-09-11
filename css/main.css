@@ -3,6 +3,7 @@
 @import url(cmps/user-msg.css);
 @import url(cmps/locs.css);
 @import url(cmps/selected-loc.css);
+@import url(cmps/globe.css);
 
 @media (min-width: 750px) {
     main {
@@ -19,8 +20,53 @@
         scrollbar-width: thin;
         scrollbar-color: var(--gray1) transparent;
         scrollbar-gutter: stable;
-        margin-left: 0.5em;
+        margin-left: 0.1em;
         margin-top: 0;
         margin-bottom: 0.5em;
+    }
+
+    /* .globe video {
+        height: 100vh;
+        min-height: 400px;
+        width: calc(70vw - 1em);
+
+    } */
+}
+
+@media (max-width: 750px) {
+    .locs-container {
+        width: 90.5vw;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 0.5em;
+        margin: 0.5em 0.2em;
+    }
+
+    .globe video {
+        /* height: 50vh; */
+        min-height: 300px;
+        width: 93.5vw;
+    }
+
+    .map {
+        height: 50vh;
+        min-height: 300px;
+        width: 92.5vw;
+    }
+
+    .rate-modal {
+        width: 80vw;
+        height: 30vh;
+        min-height: 200px;
+    }
+
+    .location-modal {
+        width: 80vw;
+        height: 30vh;
+        /* min-height: 300px; */
+    }
+
+    .location-modal .modal-content label {
+        font-size: .9em;
+        font-weight: bold;
     }
 }

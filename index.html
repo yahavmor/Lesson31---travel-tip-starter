@@ -29,17 +29,26 @@
             <button onclick="app.onCloseWindow()">Close window</button>
             <input name="loc-copier" />
         </section>
-        <form class="form-search" onsubmit="app.onSearchAddress(event)">
+        <form class="form-search hidden" onsubmit="app.onSearchAddress(event)">
             <input type="text" name="address" placeholder="Search address" />
             <button title="Search">🔍</button>
             <button type="button" title="My Position" onclick="app.onPanToUserPos()" class="btn-user-pos">&nbsp;
             </button>
         </form>
+        <h2 class="welcome-message">Click on Earth to start your journey</h2>
 
     </header>
     <main>
-        <div class="map"></div>
-        <div>
+
+        <div class="globe">
+            <div class="globe-background"></div>
+            <video id="myVideo" onclick="app.onClickEarth()" width="1300" height="700" autoplay muted loop>
+                <source src="./img/map.mp4" />
+            </video>
+        </div>
+
+        <div class="map hidden"></div>
+        <div class="side-bar hidden">
             <section class="locs-container">
                 <section class="loc-filter">
                     <div>
