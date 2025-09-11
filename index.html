@@ -10,7 +10,16 @@
 
 <body>
     <header>
-        <h1>TravelTip</h1>
+        <div class="title">
+            <h1>Travel Tip</h1>
+            <div class="theme-toggle-container">
+                <label class="theme-toggle">
+                    <input type="checkbox" onchange="app.onToggleTheme(this.checked)" />
+                    <span class="slider"></span>
+                    <span class="theme-label">Dark Theme</span>
+                </label>
+            </div>
+        </div>
         <section class="selected-loc">
             <h2>Location: <span class="loc-name"></span> <span class="loc-rate"></span></h2>
             <h4 class="loc-address"></h4>
@@ -25,13 +34,7 @@
             <button type="button" title="My Position" onclick="app.onPanToUserPos()" class="btn-user-pos">&nbsp;
             </button>
         </form>
-        <div class="theme-toggle-container">
-            <label class="theme-toggle">
-                <input type="checkbox" onchange="app.onToggleTheme(this.checked)" />
-                <span class="slider"></span>
-                <span class="theme-label">Dark Theme</span>
-            </label>
-        </div>
+
     </header>
     <main>
         <div class="map"></div>
