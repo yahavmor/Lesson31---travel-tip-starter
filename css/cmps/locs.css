@@ -17,6 +17,9 @@
     scrollbar-color: var(--gray1) transparent;
     scrollbar-gutter: stable;
 
+    box-shadow: 5px 5px 10px var(--bg2);
+    border-radius: 0.5em;
+
 }
 
 .loc-list li {
@@ -67,6 +70,10 @@
 .loc-filter {
     background-color: var(--bg1);
     padding: 0.3em;
+
+    /* <Guy> Adding box shadow and border radius */
+    box-shadow: 5px 5px 10px var(--bg2);
+    border-radius: 0.5em;
 }
 
 .loc-filter input[type=text] {
@@ -90,7 +97,7 @@
     text-align: left;
     margin-bottom: 1em;
     color: var(--color1);
-    box-shadow: 10px 10px 10px var(--bg2);
+    box-shadow: 5px 5px 10px var(--bg2);
     padding: 0.5em;
     border-radius: 0.5em;
 }
