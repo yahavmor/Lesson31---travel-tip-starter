@@ -19,7 +19,7 @@
     scrollbar-color: var(--gray1) transparent;
     scrollbar-gutter: stable;
 
-    box-shadow: 5px 5px 10px var(--bg2);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 0.5em;
 
 }
@@ -74,7 +74,7 @@
     padding: 0.3em;
 
     /* <Guy> Adding box shadow and border radius */
-    box-shadow: 5px 5px 10px var(--bg2);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 0.5em;
 }
 
@@ -99,7 +99,7 @@
     text-align: left;
     margin-bottom: 1em;
     color: var(--color1);
-    box-shadow: 5px 5px 10px var(--bg2);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 0.5em;
     border-radius: 0.5em;
 }

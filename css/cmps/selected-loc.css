@@ -6,6 +6,8 @@
     overflow: hidden;
     transition: .5s;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .selected-loc.show {

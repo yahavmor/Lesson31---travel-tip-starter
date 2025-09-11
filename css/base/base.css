@@ -8,6 +8,11 @@ header {
     background-color: var(--bg2);
     color: aliceblue;
     padding: 0.3em;
+
+    /* <Guy> Adding box shadow and border radius */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 header h1 {
