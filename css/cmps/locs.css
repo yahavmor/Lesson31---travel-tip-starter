@@ -141,7 +141,7 @@
     border: none;
     border-radius: 0.5em;
     padding: 1.5em;
-    box-shadow: 0 0 15px var(--bg1);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     width: 350px;
 }
 
@@ -152,6 +152,24 @@
 .location-form input {
     margin-bottom: 0.5em;
     box-shadow: 2px 2px 5px var(--bg2);
+}
+
+.rate-modal {
+    border: none;
+    border-radius: 0.5em;
+    padding: 1.5em;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.rate-modal input {
+    margin-bottom: 0.5em;
+    box-shadow: 2px 2px 5px var(--bg2);
+}
+
+.rate-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .theme-toggle-container {
