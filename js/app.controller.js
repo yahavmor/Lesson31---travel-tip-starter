@@ -87,13 +87,19 @@ function onSearchAddress(ev) {
         })
 }
 
-// Guy Add this function
+// <Guy> Add this function
 function onCloseWindow() {
     const dialog = document.querySelector('.selected-loc')
     // console.log('dialog:', dialog)
     dialog.classList.remove('show')
+
+    const location = document.querySelector('.rate-modal')
+    console.log('location:', location)
+    location.close()
+
 }
 
+// <Guy > edite this function to create initial locs
 function onAddLoc(geo) {
     const dialog = document.querySelector('.location-modal')
     dialog.showModal()
@@ -173,23 +179,45 @@ function onPanToUserPos() {
         })
 }
 
+// <Guy > edite this function to create initial locs 
 function onUpdateLoc(locId) {
     locService.getById(locId)
         .then(loc => {
-            const rate = prompt('New rate?', loc.rate)
-            if (rate && rate !== loc.rate) {
-                loc.rate = rate
-                locService.save(loc)
-                    .then(savedLoc => {
-                        flashMsg(`Rate was set to: ${savedLoc.rate}`)
-                        loadAndRenderLocs()
-                    })
-                    .catch(err => {
-                        console.error('OOPs:', err)
-                        flashMsg('Cannot update location')
-                    })
+            // open modal
+            const dialog = document.querySelector('.rate-modal')
+            dialog.showModal()
 
+
+            dialog.querySelector('.loc-name').innerText = loc.name
+            const rateInput = dialog.querySelector('[name=loc-rate]')
+            rateInput.value = loc.rate
+
+
+            const saveBtn = dialog.querySelector('.btn-save')
+            const handleSave = () => {
+                const newRate = +rateInput.value
+
+                if (newRate && newRate !== loc.rate) {
+                    loc.rate = newRate
+                    locService.save(loc)
+                        .then(savedLoc => {
+                            flashMsg(`Rate was set to: ${savedLoc.rate}`)
+                            loadAndRenderLocs()
+                            dialog.close()
+                        })
+                        .catch(err => {
+                            console.error('OOPs:', err)
+                            flashMsg('Cannot update location')
+                        })
+                } else {
+                    dialog.close()
+                }
+
+
+                saveBtn.removeEventListener('click', handleSave)
             }
+
+            saveBtn.addEventListener('click', handleSave)
         })
 }
 

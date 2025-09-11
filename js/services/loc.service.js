@@ -37,6 +37,7 @@ export const locService = {
 
 }
 
+
 function query() {
     return storageService.query(DB_KEY)
         .then(locs => {
