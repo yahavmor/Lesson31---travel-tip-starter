@@ -19,6 +19,7 @@ window.app = {
     onSetFilterBy,
     onCloseLocationModal, // Guy Add this function
     onToggleTheme, // Guy Add this function
+    onCloseWindow, // Guy Add this function
 }
 
 function onInit() {
@@ -85,6 +86,12 @@ function onSearchAddress(ev) {
             console.error('OOPs:', err)
             flashMsg('Cannot lookup address')
         })
+}
+
+function onCloseWindow() {
+    const dialog = document.querySelector('.selected-loc')
+    console.log('dialog:', dialog)
+    dialog.classList.remove('show')
 }
 
 function onAddLoc(geo) {
@@ -239,6 +246,8 @@ function onShareLoc() {
     }
     navigator.share(data)
 }
+
+
 
 function flashMsg(msg) {
     const el = document.querySelector('.user-msg')
