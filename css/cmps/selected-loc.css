@@ -4,10 +4,28 @@
     max-height: 0em;
     height: 0;
     overflow: hidden;
-    transition: .5s;
+    transition: 1s;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 0.5em;
     margin-bottom: 0.5em;
+}
+
+/* <Guy> Adding transition for remove .show class */
+.selected-loc:not(.show) {
+    max-height: 0em;
+    height: 0;
+    overflow: hidden;
+    transition: 2s;
+}
+
+.selected-loc button {
+    background-color: var(--bg2);
+    color: var(--color1);
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.3em 0.5em;
+    margin: 0.2em;
+    cursor: pointer;
 }
 
 .selected-loc.show {

@@ -74,7 +74,6 @@ function renderLocs(locs) {
 }
 
 
-
 function onSearchAddress(ev) {
     ev.preventDefault()
     const el = document.querySelector('[name=address]')
@@ -88,6 +87,7 @@ function onSearchAddress(ev) {
         })
 }
 
+// Guy Add this function
 function onCloseWindow() {
     const dialog = document.querySelector('.selected-loc')
     console.log('dialog:', dialog)
@@ -247,8 +247,6 @@ function onShareLoc() {
     navigator.share(data)
 }
 
-
-
 function flashMsg(msg) {
     const el = document.querySelector('.user-msg')
     el.innerText = msg
@@ -376,8 +374,6 @@ function onConfirm(locId) {
         })
 }
 
-
-
 function onRemoveLoc(locId) {
     document.querySelector('.removal-modal').showModal();
 
@@ -399,7 +395,6 @@ function onRemoveLoc(locId) {
             });
     });
 }
-
 
 function onToggleTheme(isDarkTheme) {
     const root = document.documentElement
