@@ -99,7 +99,7 @@ function onCloseWindow() {
 
 }
 
-// <Guy > edite this function to create initial locs
+// <Guy > edit this function to create initial locs
 function onAddLoc(geo) {
     const dialog = document.querySelector('.location-modal')
     dialog.showModal()

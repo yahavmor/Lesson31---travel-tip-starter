@@ -11,3 +11,42 @@
     bottom: 10px;
     transition: bottom .5s;
 }
+.removal-modal {
+    padding: 2em;
+    width: max-content;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 0.5em;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.modal-header {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1em;
+    color: var( --bg1);
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-top: 2em;
+}
+
+.modal-actions button {
+    flex: 1;
+    font-weight: bold;
+    padding: 0.75em;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+}
+.removal-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+

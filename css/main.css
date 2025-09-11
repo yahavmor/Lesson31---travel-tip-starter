@@ -12,7 +12,7 @@
 
     .locs-container {
         width: 30vw;
-        min-height: 100vh;
+        min-height: 98.5vh;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         border-radius: 0.5em;
         overflow-y: auto;
