@@ -7,6 +7,15 @@
 .loc-list {
     list-style: none;
     padding: 0;
+
+    /*  for the list of locations - Guy Adding */
+    max-height: 45vh;
+    overflow-y: auto;
+    margin-bottom: 1em;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray1) transparent;
+    scrollbar-gutter: stable;
+
 }
 
 .loc-list li {
