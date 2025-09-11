@@ -90,7 +90,7 @@ function onSearchAddress(ev) {
 // Guy Add this function
 function onCloseWindow() {
     const dialog = document.querySelector('.selected-loc')
-    console.log('dialog:', dialog)
+    // console.log('dialog:', dialog)
     dialog.classList.remove('show')
 }
 

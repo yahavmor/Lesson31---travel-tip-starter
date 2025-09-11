@@ -12,10 +12,11 @@
 
 /* <Guy> Adding transition for remove .show class */
 .selected-loc:not(.show) {
+
     max-height: 0em;
     height: 0;
     overflow: hidden;
-    transition: 2s;
+    transition: 1s;
 }
 
 .selected-loc button {

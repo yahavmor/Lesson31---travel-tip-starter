@@ -20,7 +20,7 @@ const DB_KEY = 'locs'
 var gSortBy = { rate: -1 }
 var gFilterBy = { txt: '', minRate: 0 }
 var gPageIdx
-let gUserPos = {lat:31.8872,lng:34.8856}
+let gUserPos = { lat: 31.8872, lng: 34.8856 }
 
 _createLocs()
 
@@ -42,7 +42,7 @@ function query() {
         .then(locs => {
             if (gFilterBy.txt) {
                 const regex = new RegExp(gFilterBy.txt, 'i')
-                locs = locs.filter(loc => regex.test(loc.name)||regex.test(loc.geo.address))
+                locs = locs.filter(loc => regex.test(loc.name) || regex.test(loc.geo.address))
             }
             if (gFilterBy.minRate) {
                 locs = locs.filter(loc => loc.rate >= gFilterBy.minRate)
@@ -58,7 +58,7 @@ function query() {
                 locs.sort((p1, p2) => (p1.rate - p2.rate) * gSortBy.rate)
             } else if (gSortBy.name !== undefined) {
                 locs.sort((p1, p2) => p1.name.localeCompare(p2.name) * gSortBy.name)
-            } else if(gSortBy.time !== undefined){
+            } else if (gSortBy.time !== undefined) {
                 locs.sort((p1, p2) => (p1.createdAt - p2.createdAt) * gSortBy.time)
             }
             return locs
@@ -151,7 +151,7 @@ function _createDemoLocs() {
     locs = locs.map(loc => {
         const placePos = { lat: loc.geo.lat, lng: loc.geo.lng }
         loc.dis = utilService.getDistance(gUserPos, placePos)
-        return loc   
+        return loc
     })
 
     locs = locs.map(_createLoc)
@@ -164,7 +164,7 @@ function _createLoc(loc) {
     return loc
 }
 
-function showDistance(loc){
+function showDistance(loc) {
     if (!loc || !loc.geo) return null
     const latLng = { lat: loc.geo.lat, lng: loc.geo.lng }
     const dis = utilService.getDistance(gUserPos, latLng, 'K')
@@ -174,6 +174,8 @@ function showDistance(loc){
     }
     return dis
 }
+
+
 
 
 // unused functions
