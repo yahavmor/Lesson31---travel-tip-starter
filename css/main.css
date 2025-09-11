@@ -9,8 +9,18 @@
         display: flex;
         flex-direction: row-reverse;
     }
+
     .locs-container {
         width: 30vw;
+        min-height: 100vh;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 0.5em;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--gray1) transparent;
+        scrollbar-gutter: stable;
+        margin-left: 0.5em;
+        margin-top: 0;
+        margin-bottom: 0.5em;
     }
 }
-
