@@ -180,7 +180,7 @@
     border-radius: 0.5em;
     padding: 1.5em;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    width: 300px;
+    width: 380px;
     text-align: center;
 }
 
@@ -195,16 +195,55 @@
 
 .modal-content {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
 }
 
+/* .modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: var(--bg1);
+} */
+
+.modal-content h3.title-loc {
+    margin-top: 0;
+    width: 140px;
+    /* width: 100%; */
+    margin-bottom: 0.5em;
+    color: var(--bg1);
+}
+
+.modal-content h3.title-rate {
+    margin-top: 0;
+    width: 131px;
+    /* width: 100%; */
+    margin-bottom: 0.5em;
+    color: var(--bg1);
+}
+
+.modal-content label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+    gap: 1.5em;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
 .modal-content input {
-    width: 90%;
+    width: 60%;
     padding: 0.3em;
     margin-bottom: 0.5em;
     border: 1px solid var(--gray1);
     border-radius: 0.3em;
+}
+
+.modal-content input[type="number"] {
+    width: 10%;
 }
 
 .rate-modal {
