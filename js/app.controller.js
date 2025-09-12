@@ -12,7 +12,7 @@ window.app = {
     onUpdateLoc,
     onSelectLoc,
     onPanToUserPos,
-    onSearchAddress,
+    onSearchAddress,// Guy and Yahav Add this function
     onCopyLoc,
     onShareLoc,
     onSetSortBy,
@@ -161,7 +161,8 @@ function onSearchAddress(ev) {
     const el = document.querySelector('[name=address]')
     mapService.lookupAddressGeo(el.value)
         .then(geo => {
-            mapService.panTo(geo)
+            /* <Guy> add zoom level for marker */
+            mapService.panTo({ ...geo, zoom: 19 })
             mapService.setMarker(geo)
         })
         .catch(err => {
