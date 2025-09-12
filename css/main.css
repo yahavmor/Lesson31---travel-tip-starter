@@ -25,6 +25,12 @@
         margin-bottom: 0.5em;
     }
 
+    .globe video {
+        /* height: 50vh; */
+        min-height: 300px;
+        width: 96.8vw;
+    }
+
     /* .globe video {
         height: 100vh;
         min-height: 400px;
@@ -44,7 +50,7 @@
     .globe video {
         /* height: 50vh; */
         min-height: 300px;
-        width: 93.5vw;
+        width: 93.8vw;
     }
 
     .map {
@@ -68,5 +74,68 @@
     .location-modal .modal-content label {
         font-size: .9em;
         font-weight: bold;
+    }
+}
+
+@media (max-width: 620px) {
+    .globe {
+        height: 60vh;
+        margin-left: -0.4em;
+    }
+
+    .globe video {
+        width: 123.5vw;
+        height: 190.5vw;
+        min-height: 300px;
+        max-height: 690px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 420px) {
+    .globe {
+        height: 60vh;
+        margin-left: -0.4em;
+    }
+
+    .globe video {
+        width: 134.5vw;
+        height: 190.5vw;
+        min-height: 300px;
+        max-height: 800px;
+        object-fit: cover;
+    }
+}
+
+
+@media (max-width: 390px) {
+
+    .globe {
+        height: 60vh;
+        margin-left: -0.4em;
+    }
+
+    .globe video {
+        width: 123.5vw;
+        height: 190.5vw;
+        min-height: 300px;
+        max-height: 670px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 360px) {
+
+    .globe {
+        height: 60vh;
+        margin-left: -0.4em;
+    }
+
+    .globe video {
+        width: 108.5vw;
+        height: 190.5vw;
+        min-height: 300px;
+        max-height: 500px;
+        object-fit: cover;
     }
 }
