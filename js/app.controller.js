@@ -155,13 +155,14 @@ function renderLocs(locs) {
     document.querySelector('.debug').innerText = JSON.stringify(locs, null, 2)
 }
 
-
+/* <yahav> editing function to set marker */
 function onSearchAddress(ev) {
     ev.preventDefault()
     const el = document.querySelector('[name=address]')
     mapService.lookupAddressGeo(el.value)
         .then(geo => {
             mapService.panTo(geo)
+            mapService.setMarker(geo)
         })
         .catch(err => {
             console.error('OOPs:', err)
