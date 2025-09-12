@@ -47,13 +47,15 @@ function onClickEarth() {
         const elSearchForm = document.querySelector('.form-search')
         elSearchForm.classList.remove('hidden')
 
+        const elFilterSort = document.querySelector('.selected-loc')
+        elFilterSort.classList.remove('hidden')
 
         setTimeout(() => {
             if (window.google && window.google.maps) {
 
                 mapService.initMap()
                     .then(() => {
-
+                        onPanToUserPos()
                         startMapZoomAnimation()
                         mapService.addClickListener(onAddLoc)
                         loadAndRenderLocs()
