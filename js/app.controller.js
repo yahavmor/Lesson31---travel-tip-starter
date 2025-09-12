@@ -311,6 +311,7 @@ function onSelectLoc(locId) {
 }
 
 function displayLoc(loc) {
+    document.querySelector('.theme-toggle-container').style.border = 'none' //yahav 12/09/25 09:43 
     document.querySelector('.loc.active')?.classList?.remove('active')
     document.querySelector(`.loc[data-id="${loc.id}"]`).classList.add('active')
 
