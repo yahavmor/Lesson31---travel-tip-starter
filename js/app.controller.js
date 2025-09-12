@@ -2,6 +2,9 @@
 import { utilService } from './services/util.service.js'
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+// import { Swal } from "./services/swal.js" // <guy> editing function to set marker
+
+const Swal = window.Sweetalert2 || window.Swal
 
 window.onload = onInit
 
@@ -164,10 +167,31 @@ function onSearchAddress(ev) {
             /* <Guy> add zoom level for marker */
             mapService.panTo({ ...geo, zoom: 19 })
             mapService.setMarker(geo)
+
+            return Swal.fire({
+                title: 'Save location?',
+                text: `Found: ${geo.address}`,
+                // icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Save Location',
+                cancelButtonText: 'Just View',
+                confirmButtonColor: '#2778c4',
+                cancelButtonColor: '#757575',
+                width: '390px',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    onAddLoc(geo)
+                }
+            })
         })
         .catch(err => {
             console.error('OOPs:', err)
-            flashMsg('Cannot lookup address')
+            Swal.fire({
+                title: 'Search Failed',
+                text: 'Cannot find this location. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
         })
 }
 

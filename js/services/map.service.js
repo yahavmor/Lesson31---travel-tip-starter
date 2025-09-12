@@ -1,3 +1,5 @@
+
+
 export const mapService = {
     initMap,
     getUserPosition,
@@ -75,6 +77,7 @@ function setMarker(locOrGeo, name = 'Searched location') {
         map: gMap,
         title: locOrGeo.name || name
     })
+
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
