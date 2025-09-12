@@ -55,13 +55,13 @@
 
     .rate-modal {
         width: 80vw;
-        height: 30vh;
+        height: 35vh;
         min-height: 200px;
     }
 
     .location-modal {
         width: 80vw;
-        height: 30vh;
+        height: 35vh;
         /* min-height: 300px; */
     }
 
