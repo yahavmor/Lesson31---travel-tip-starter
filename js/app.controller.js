@@ -155,13 +155,14 @@ function renderLocs(locs) {
     document.querySelector('.debug').innerText = JSON.stringify(locs, null, 2)
 }
 
-
+/* <yahav> editing function to set marker */
 function onSearchAddress(ev) {
     ev.preventDefault()
     const el = document.querySelector('[name=address]')
     mapService.lookupAddressGeo(el.value)
         .then(geo => {
             mapService.panTo(geo)
+            mapService.setMarker(geo)
         })
         .catch(err => {
             console.error('OOPs:', err)
@@ -311,6 +312,7 @@ function onSelectLoc(locId) {
 }
 
 function displayLoc(loc) {
+    document.querySelector('.theme-toggle-container').style.border = 'none' //yahav 12/09/25 09:43 
     document.querySelector('.loc.active')?.classList?.remove('active')
     document.querySelector(`.loc[data-id="${loc.id}"]`).classList.add('active')
 

@@ -32,7 +32,7 @@ function panTo({ lat, lng, zoom = 15 }) {
     gMap.panTo(laLatLng)
     gMap.setZoom(zoom)
 }
-
+/* <yahav> editing function */
 function lookupAddressGeo(geoOrAddress) {
     var url = `https://maps.googleapis.com/maps/api/geocode/json?key=${API_KEY}&`
     url += (geoOrAddress.lat) ? `latlng=${geoOrAddress.lat},${geoOrAddress.lng}` :
@@ -44,12 +44,12 @@ function lookupAddressGeo(geoOrAddress) {
             res = res.results[0]
             const { formatted_address, geometry } = res
 
-            const geo = {
-                address: formatted_address.substring(formatted_address.indexOf(' ')).trim(),
-                lat: geometry.location.lat,
-                lng: geometry.location.lng,
-                zoom: gMap.getZoom()
-            }
+        const geo = {
+            address: formatted_address.substring(formatted_address.indexOf(' ')).trim(),
+            lat: geometry.location.lat,      
+            lng: geometry.location.lng,     
+            zoom: gMap.getZoom()
+        }
             return geo
         })
 
@@ -61,16 +61,22 @@ function addClickListener(cb) {
         lookupAddressGeo(geo).then(cb)
     })
 }
+/* <yahav> editing function to accept also geo */
+function setMarker(locOrGeo, name = 'Searched location') {
+    if (gMarker) gMarker.setMap(null)
+    if (!locOrGeo) return
 
-function setMarker(loc) {
-    (gMarker) && gMarker.setMap(null)
-    if (!loc) return
+    const geo = locOrGeo.geo || locOrGeo
+
     gMarker = new google.maps.Marker({
-        position: loc.geo,
+        position: { lat: +geo.lat, lng: +geo.lng }, 
         map: gMap,
-        title: loc.name
+        title: locOrGeo.name || name
     })
 }
+
+
+
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getUserPosition() {
