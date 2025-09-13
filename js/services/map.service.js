@@ -47,12 +47,12 @@ function lookupAddressGeo(geoOrAddress) {
             res = res.results[0]
             const { formatted_address, geometry } = res
 
-            const geo = {
-                address: formatted_address.substring(formatted_address.indexOf(' ')).trim(),
-                lat: geometry.location.lat,
-                lng: geometry.location.lng,
-                zoom: gMap.getZoom()
-            }
+        const geo = {
+            address: formatted_address.substring(formatted_address.indexOf(' ')).trim(),
+            lat: geometry.location.lat,      
+            lng: geometry.location.lng,     
+            zoom: gMap.getZoom(10)
+        }
             return geo
         })
 
