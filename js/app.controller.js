@@ -171,15 +171,15 @@ function onSearchAddress(ev) {
             mapService.setMarker(geo)
 
             return Swal.fire({
-                title: 'Save location?',
-                text: `Found: ${geo.address}`,
-                // icon: 'success',
+                title: 'Successfully found location',
+                text: `${geo.address}`,
+                icon: 'success',
                 showCancelButton: true,
                 confirmButtonText: 'Save Location',
                 cancelButtonText: 'Just View',
                 confirmButtonColor: '#2778c4',
                 cancelButtonColor: '#757575',
-                width: '390px',
+                width: '450px',
             }).then((result) => {
                 if (result.isConfirmed) {
                     onAddLoc(geo)
